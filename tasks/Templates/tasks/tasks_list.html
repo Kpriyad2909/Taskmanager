@@ -1,0 +1,86 @@
+{% load static %}
+<!Doctype html>
+<head>
+    <title>Tasks Manager</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" /> 
+</head>
+<body>
+  <header>
+    <div><h1>Home tasks List</h1></div>
+       <div class="nav">
+        <strong><a href="{% url 'tasks:addtasks' %}">Add new tasks</a></strong> 
+    </div> 
+  </header>
+  <form method="get">
+  <!-- Status Filter -->
+  <label>Status:</label>
+  <select name="status" onchange="this.form.submit()">
+    <option value="">All</option>
+    <option value="Pending" {% if filterstatus == 'Pending' %}selected{% endif %}>Pending</option>
+    <option value="Completed" {% if filterstatus == 'Completed' %}selected{% endif %}>Completed</option>
+  </select>
+
+  <!-- Priority Filter -->
+  <label>Priority:</label>
+  <select name="priority" onchange="this.form.submit()">
+    <option value="">All</option>
+    <option value="high" {% if filterpriority == 'high' %}selected{% endif %}>High</option>
+    <option value="medium" {% if filterpriority == 'medium' %}selected{% endif %}>Medium</option>
+    <option value="low" {% if filterpriority == 'low' %}selected{% endif %}>Low</option>
+  </select>
+
+  <!-- Reset Button -->
+   <a href="{{ request.path }}"> <button type="button">Reset</button> </a>
+   </form>
+
+<form method="post" action="{% url 'tasks:deletetask' %}">
+    {% csrf_token %}
+{% if result %}
+<!-- Table Heading -->
+ <table class = "table updated-details">
+    <tr>
+      <th>Select</th>
+     <th>Name</th>
+     <th>Description</th>
+     <th>Duedate</th>
+     <th>Priority</th>
+     <th>Final status</th>
+     <th>Update the completion status </th>
+  {% for item in result %}
+    <tr>
+      <td><input type="checkbox" name="delete_task" value="{{ item.id }}"></td>
+      <!-- Table Items -->
+     <td>{{ item.title }}</td>
+     <td>{{ item.description }}</td>
+     <td>{{ item.duedate|date:"Y - M - d" }}</td>
+     <td>{{ item.priority }}</td>
+     <td>{{ item.status }}</td> 
+    <td>
+      <!-- Completion status -->
+    {% if item.status == "Completed" %}
+      <form method="post" action="{% url 'tasks:marktaskascompleted' item.id 'false' %}">
+      {% csrf_token %}
+       <button class = "button button1" type="submit">Task Pending</button>
+      </form>
+    {% else %}
+      <form method="post" action="{% url 'tasks:marktaskascompleted' item.id 'true' %}">
+      {% csrf_token %}
+        <button class = "button button2" type="submit">Task Completed</button>
+        </form>
+    {% endif %}
+    </td>
+</td>
+   </tr>
+  {% endfor %}
+  </table>
+  <br>
+  <!-- Delete button -->
+  <center><button class = "button button3" type="submit">Delete Task</button></center>
+  </form>
+{% else %}
+   <h4>No tasks added - Add new tasks to display </h4> 
+{% endif %}
+</body>
+</html>
+    
+     

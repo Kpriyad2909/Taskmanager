@@ -1,0 +1,55 @@
+{% load static %}
+<!Doctype html>
+<head>
+    <title>Add tasks</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"/> 
+</head>
+<body>
+    <h2>Add New Tasks</h2>
+    <br>
+    <center>
+    <form method="post">
+    <table class = "details">
+      <!-- Table Items -->
+      <tr>
+        <td><b>Task Name</b></td>
+        <td><input type="text" name="title" placeholder="Enter the task name"minlength="1" maxlength="20" required/></td>
+      </tr>
+
+      <tr>
+        <td><b>Description</b></td>
+        <td><input type="text" name="description" placeholder="Enter the description" minlength="1" maxlength="100" required/></td>
+      </tr>
+
+      <tr>
+        <td><b>Due date</b></td>
+        <td><input type="date" name="duedate" placeholder="Enter the due date" required/></td>
+      </tr>
+
+      <tr>
+        <td><b>Priority</b></td>
+         <td>
+          <select name = "priority" required>
+            <option value="">Select priority</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </td>
+      </tr>
+       <tr>
+         {% csrf_token %}
+        <td><input class = 'one' type="submit" /></td>
+        <td><input class = 'two' type="reset" /></td>
+      </tr>
+    </table>
+  </form>
+  </center>
+  <br>
+  <!-- Mainpage redirect link -->
+    <center>
+    <strong><a href="{% url 'tasks:listtasks' %}">Go to mainpage</a></strong> 
+    </center>
+</body>
+</html>
+
