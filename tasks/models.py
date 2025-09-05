@@ -6,6 +6,7 @@ class Tasks(models.Model):
     duedate = models.DateField()
     priority = models.CharField(null=True, blank=True)  
     status = models.CharField()  
+    #status = models.CharField(max_length=20, choices=[("Pending", "Pending"), ("Completed", "Completed")], default="Pending")
     completed = models.BooleanField(default=False)  
 
     def __str__(self):

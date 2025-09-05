@@ -1,41 +1,36 @@
+{% extends 'tasks/base.html' %}
 {% load static %}
+{% block content %}
 <!Doctype html>
 <head>
-    <title>Add tasks</title>
+    <title>Add new tasks</title>
     <link rel="stylesheet" href="{% static 'style.css' %}"/> 
 </head>
 <body>
-    <h2>Add New Tasks</h2>
+    <h2>Add New Tasks<span class ="add-emoji">➕</span></h2>
     <br>
-    <center>
+    <div class ="form1">
     <form method="post">
     <table class = "details">
       <!-- Table Items -->
       <tr>
         <td><b>Task Name</b></td>
-        <td><input type="text" name="title" placeholder="Enter the task name"minlength="1" maxlength="20" required/></td>
+        <td>{{form.title}}</td>
       </tr>
 
       <tr>
         <td><b>Description</b></td>
-        <td><input type="text" name="description" placeholder="Enter the description" minlength="1" maxlength="100" required/></td>
+        <td>{{form.description}}</td>
       </tr>
 
       <tr>
         <td><b>Due date</b></td>
-        <td><input type="date" name="duedate" placeholder="Enter the due date" required/></td>
+        <td>{{form.duedate}}</td>
       </tr>
 
       <tr>
         <td><b>Priority</b></td>
-         <td>
-          <select name = "priority" required>
-            <option value="">Select priority</option>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-        </td>
+         <td>{{form.priority}}</td>
       </tr>
        <tr>
          {% csrf_token %}
@@ -44,12 +39,10 @@
       </tr>
     </table>
   </form>
-  </center>
+  </div>
   <br>
   <!-- Mainpage redirect link -->
-    <center>
-    <strong><a href="{% url 'tasks:listtasks' %}">Go to mainpage</a></strong> 
-    </center>
+    <a href="{% url 'tasks:listtasks' %}" class="button button5">Go to mainpage</a>
 </body>
 </html>
-
+{% endblock %}

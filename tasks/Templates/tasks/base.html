@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" /> 
+  </head>
+    <body>
+        <h1 class ='h11'><span class="task-emoji">📝</span>Task Manager</h1>
+    <main>
+      {% block content %}
+      <!-- page content will go here -->
+      {% endblock %}
+    </main>
+    </body>
+</html>

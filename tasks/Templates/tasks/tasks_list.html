@@ -1,20 +1,34 @@
+{% extends 'tasks/base.html' %}
 {% load static %}
+{% block content %}
 <!Doctype html>
 <head>
-    <title>Tasks Manager</title>
+    <title>Task Lists</title>
     <link rel="stylesheet" href="{% static 'style.css' %}" /> 
 </head>
 <body>
-  <header>
-    <div><h1>Home tasks List</h1></div>
+    <header>
+      <div><h2 class = 'h21'>Task lists<span class = "list-emoji">📋</span></h2></div>
        <div class="nav">
-        <strong><a href="{% url 'tasks:addtasks' %}">Add new tasks</a></strong> 
-    </div> 
-  </header>
+        
+        <a href="{% url 'tasks:addtasks' %}" class="button button4">Add new tasks</a>
+      </div> 
+    </header>
+
+<!-- Filter Form -->
+<div class="filter">
+<!-- Search Form -->
+<form method="get">
+  <div class="search">
+    <input type="text" name="search" placeholder="Search..." class="search-input" value="{{ searchtasks }}">
+    <button type="submit" class="search-button">🔍</button>
+  </div>
+  </form>
+<div class="filter-controls">
   <form method="get">
   <!-- Status Filter -->
   <label>Status:</label>
-  <select name="status" onchange="this.form.submit()">
+  <select class = "status" name="status" onchange="this.form.submit()">
     <option value="">All</option>
     <option value="Pending" {% if filterstatus == 'Pending' %}selected{% endif %}>Pending</option>
     <option value="Completed" {% if filterstatus == 'Completed' %}selected{% endif %}>Completed</option>
@@ -22,17 +36,18 @@
 
   <!-- Priority Filter -->
   <label>Priority:</label>
-  <select name="priority" onchange="this.form.submit()">
+  <select class = "priority" name="priority" onchange="this.form.submit()">
     <option value="">All</option>
-    <option value="high" {% if filterpriority == 'high' %}selected{% endif %}>High</option>
-    <option value="medium" {% if filterpriority == 'medium' %}selected{% endif %}>Medium</option>
-    <option value="low" {% if filterpriority == 'low' %}selected{% endif %}>Low</option>
+    <option value="high" {% if filterpriority == 'high' %}selected{% endif %}>high</option>
+    <option value="medium" {% if filterpriority == 'medium' %}selected{% endif %}>medium</option>
+    <option value="low" {% if filterpriority == 'low' %}selected{% endif %}>low</option>
   </select>
 
   <!-- Reset Button -->
-   <a href="{{ request.path }}"> <button type="button">Reset</button> </a>
+   <a href="{{ request.path }}" class = "button button6">Reset</a>
    </form>
-
+</div>
+</div>
 <form method="post" action="{% url 'tasks:deletetask' %}">
     {% csrf_token %}
 {% if result %}
@@ -40,47 +55,57 @@
  <table class = "table updated-details">
     <tr>
       <th>Select</th>
-     <th>Name</th>
+     <th>Task name</th>
      <th>Description</th>
-     <th>Duedate</th>
+     <th>Duedate📅</th>
      <th>Priority</th>
      <th>Final status</th>
      <th>Update the completion status </th>
+     <th>Edit task</th>
+     
   {% for item in result %}
     <tr>
-      <td><input type="checkbox" name="delete_task" value="{{ item.id }}"></td>
+<br>
+     <td><input type="checkbox" name="delete_task" value="{{ item.id }}"></td>
       <!-- Table Items -->
      <td>{{ item.title }}</td>
      <td>{{ item.description }}</td>
      <td>{{ item.duedate|date:"Y - M - d" }}</td>
      <td>{{ item.priority }}</td>
      <td>{{ item.status }}</td> 
+    </form>
     <td>
       <!-- Completion status -->
-    {% if item.status == "Completed" %}
-      <form method="post" action="{% url 'tasks:marktaskascompleted' item.id 'false' %}">
-      {% csrf_token %}
-       <button class = "button button1" type="submit">Task Pending</button>
-      </form>
-    {% else %}
-      <form method="post" action="{% url 'tasks:marktaskascompleted' item.id 'true' %}">
-      {% csrf_token %}
-        <button class = "button button2" type="submit">Task Completed</button>
-        </form>
-    {% endif %}
-    </td>
+    <form method="post" action="{% url 'tasks:marktaskascompleted' item.id %}">
+    {% csrf_token %}
+      <button type="submit" name="status" value="{% if item.status == 'Completed' %}false{% else %}true{% endif %}" class="icon-btn">
+        {% if item.status == "Completed" %}
+            ✅ <span class="statusC">Completed</span>
+        {% else %}
+            ⏳ <span class="statusP">Pending</span>
+        {% endif %}
+      </button>
+    </form>
+  </td>
+  <td class="center-cell"> <!-- 🆕 New column -->
+        {% if item.id %}
+          <a href="{% url 'tasks:edit_task' item.id %}" class="edit-button">✏️</a>
+        {% endif %}
+      </td>
 </td>
    </tr>
   {% endfor %}
   </table>
   <br>
   <!-- Delete button -->
-  <center><button class = "button button3" type="submit">Delete Task</button></center>
+  <button class = "button button3" type="submit">Delete Task</button>
   </form>
 {% else %}
    <h4>No tasks added - Add new tasks to display </h4> 
 {% endif %}
 </body>
 </html>
+{% endblock %}
+
     
      
