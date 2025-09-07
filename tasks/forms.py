@@ -1,6 +1,6 @@
 from django import forms
 
-class TaskForm(forms.Form):
+class TasksInputForm(forms.Form):
     title = forms.CharField(required= True, max_length=15, label='Title')
     description = forms.CharField(required= True,widget=forms.TextInput, max_length=100, label='Description')
     duedate = forms.DateField(required=True, widget=forms.DateInput(attrs={'type': 'date'}))

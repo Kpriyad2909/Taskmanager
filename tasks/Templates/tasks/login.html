@@ -1,0 +1,46 @@
+{% extends 'tasks/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <div class = "frontpage">
+        <!-- Login form -->
+        <form class = "loginpageview" method="post">
+            {% csrf_token %} 
+          <!-- Login heading -->
+            <h2>Login</h2>
+            <hr>
+            <!-- Display error/success messages -->
+           {% if messages %}
+               {% for message in messages %}
+                <div class="alert1 {{ message.tags }}" role="alert">
+                   {{ message }}
+                 </div>
+               {% endfor %}
+           {% endif %}
+
+            <!-- Username input field -->
+            <div class="form-input">
+                <!-- Label and input for username -->
+              <label for="username">Username</label>
+              <input type="text" id="username" name="username" placeholder="Enter username" required>
+            </div>
+            <!-- Password input field -->
+            <div class="form-input">
+              <!-- Label and input for password -->
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" placeholder="Enter password" required>
+            </div>
+            <!-- Link to registration page -->
+            <p>Don't have an account?<a href="/signup/" class="register">Register</a> </p>
+            <!-- Submit button -->
+            <button type="submit" class="button button7">Submit</button>  
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}
