@@ -25,30 +25,31 @@
   </div>
   </form>
 <div class="filter-controls">
-  <form method="get">
-  <!-- Status Filter -->
+ <form method="get" action="{% url 'tasks:listtasks' %}">
   <label>Status:</label>
-  <select class = "status" name="status" onchange="this.form.submit()">
+  <select name="status">
     <option value="">All</option>
     <option value="Pending" {% if filterstatus == 'Pending' %}selected{% endif %}>Pending</option>
     <option value="Completed" {% if filterstatus == 'Completed' %}selected{% endif %}>Completed</option>
   </select>
 
-  <!-- Priority Filter -->
   <label>Priority:</label>
-  <select class = "priority" name="priority" onchange="this.form.submit()">
+  <select name="priority">
     <option value="">All</option>
-    <option value="high" {% if filterpriority == 'high' %}selected{% endif %}>high</option>
-    <option value="medium" {% if filterpriority == 'medium' %}selected{% endif %}>medium</option>
-    <option value="low" {% if filterpriority == 'low' %}selected{% endif %}>low</option>
+    <option value="high" {% if filterpriority == 'high' %}selected{% endif %}>High</option>
+    <option value="medium" {% if filterpriority == 'medium' %}selected{% endif %}>Medium</option>
+    <option value="low" {% if filterpriority == 'low' %}selected{% endif %}>Low</option>
   </select>
 
+  <button class = "button9" type="submit">Filter</button> 
+
   <!-- Reset Button -->
-   <a href="{{ request.path }}" class = "button button6">Reset</a>
+   <a href="{{ request.path }}" class = "button6">Reset</a>
    </form>
 </div>
-</div>
+ </div>
 <form method="post" action="{% url 'tasks:deletetask' %}">
+ 
     {% csrf_token %}
 {% if result %}
 <!-- Table Heading -->
@@ -65,7 +66,7 @@
      
   {% for item in result %}
     <tr>
-<br>
+
      <td><input type="checkbox" name="delete_task" value="{{ item.id }}"></td>
       <!-- Table Items -->
      <td>{{ item.title }}</td>
@@ -106,6 +107,3 @@
 </body>
 </html>
 {% endblock %}
-
-    
-     

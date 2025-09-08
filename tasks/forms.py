@@ -1,10 +1,13 @@
 from django import forms
+from .models import Tasks
 
-class TasksInputForm(forms.Form):
-    title = forms.CharField(required= True, max_length=15, label='Title')
-    description = forms.CharField(required= True,widget=forms.TextInput, max_length=100, label='Description')
-    duedate = forms.DateField(required=True, widget=forms.DateInput(attrs={'type': 'date'}))
-    #duedate = forms.DateField(required= True,widget=forms.SelectDateWidget, label='Due Date')
-    priority = forms.ChoiceField(required= True,choices=[('', 'All'), ('high', 'high') , ('medium', 'medium'),('low', 'low')], label='Priority')
-    # status field is not included as it is set to 'Pending' by default in the view
-    
+class TasksInputForm(forms.ModelForm):
+    class Meta:
+        model = Tasks
+        fields = ['title', 'description', 'duedate', 'priority']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
+            'duedate': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'priority': forms.Select(attrs={'class': 'form-select'},choices=[('', 'All'), ('high', 'high') , ('medium', 'medium'),('low', 'low')]),
+        }
