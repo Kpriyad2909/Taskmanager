@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('duedate', models.DateField()),
                 ('priority', models.CharField(blank=True, null=True)),
                 ('status', models.CharField()),
-                ('completed', models.BooleanField(default=False)),
+               
             ],
         ),
     ]

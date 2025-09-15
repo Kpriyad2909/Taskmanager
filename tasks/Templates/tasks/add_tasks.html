@@ -1,17 +1,9 @@
-{% extends 'tasks/base.html' %}
-{% load static %}
-{% block content %}
-<!Doctype html>
-<head>
-    <title>Add new tasks</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}"/> 
-</head>
-<body>
-    <h2>Add New Tasks<span class ="add-emoji">➕</span></h2>
-    <br>
-    <div class ="form1">
-    <form method="post">
-    <table class = "details">
+{% extends 'tasks/base.html' %} {% load static %} {% block content %}
+<h2>Add New Tasks<span class="add-emoji">➕</span></h2>
+<br />
+<div class="form1">
+  <form method="post">
+    <table class="details">
       <!-- Table Items -->
       <tr>
         <td><b>Task Name</b></td>
@@ -30,19 +22,40 @@
 
       <tr>
         <td><b>Priority</b></td>
-         <td>{{form.priority}}</td>
+          <td>
+        {{ form.priority }}
+        {% if form.priority.errors %}
+          <div style="color:red;">
+            {% for error in form.priority.errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </td>
       </tr>
-       <tr>
-         {% csrf_token %}
-        <td><input class = 'one' type="submit" /></td>
-        <td><input class = 'two' type="reset" /></td>
+
+      <tr>
+        <td><b>Status</b></td>
+          <td>
+        {{ form.completed }}
+        {% if form.completed.errors %}
+          <div style="color:red;">
+            {% for error in form.completed.errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </td>
+      </tr>
+      <tr>
+        {% csrf_token %}
+        <td><input class="one" type="submit" /></td>
+        <td><input class="two" type="reset" /></td>
       </tr>
     </table>
   </form>
-  </div>
-  <br>
-  <!-- Mainpage redirect link -->
-    <a href="{% url 'tasks:listtasks' %}" class="button button5">Go to mainpage</a>
-</body>
-</html>
+</div>
+<br />
+<!-- Mainpage redirect link -->
+<a href="{% url 'tasks:listtasks' %}" class="button5">Go to mainpage</a>
 {% endblock %}
