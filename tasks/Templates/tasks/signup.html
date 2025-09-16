@@ -1,11 +1,6 @@
 {% extends 'tasks/base.html' %}
 {% load static %}
 {% block content %}
-<!DOCTYPE html>
-<head>
-    <title>Login</title>
-</head>
-<body>
     <div class = "registerpage">
         <form class = "signuppageview" method="post">
             {% csrf_token %} 
@@ -40,6 +35,4 @@
             <button type="submit" class="button button8">Submit</button> 
         </form>
     </div>
-</body>
-</html>
 {% endblock %}

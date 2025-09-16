@@ -1,17 +1,11 @@
 {% extends 'tasks/base.html' %}
 {% load static %}
 {% block content %}
-<!Doctype html>
-<head>
-    <title>Task Lists</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}" /> 
-</head>
-<body>
     <header>
       <div><h2 class = 'h21'>Task lists<span class = "list-emoji">📋</span></h2></div>
        <div class="nav">
-        
-        <a href="{% url 'tasks:addtasks' %}" class="button button4">Add new tasks</a>
+        <a href="{% url 'tasks:addtasks' %}" class="button4">Add new tasks</a>
+        <a href="{% url 'tasks:login' %}" class = "buttonL">Logout</a>
       </div> 
     </header>
 
@@ -30,7 +24,8 @@
   <select name="status">
     <option value="">All</option>
     <option value="Pending" {% if filterstatus == 'Pending' %}selected{% endif %}>Pending</option>
-    <option value="Completed" {% if filterstatus == 'Completed' %}selected{% endif %}>Completed</option>
+    <option value="Pending" {% if filterstatus == 'In Progress' %}selected{% endif %}>In Progress</option>
+    <option value="status" {% if filterstatus == 'status' %}selected{% endif %}>status</option>
   </select>
 
   <label>Priority:</label>
@@ -48,62 +43,42 @@
    </form>
 </div>
  </div>
-<form method="post" action="{% url 'tasks:deletetask' %}">
  
     {% csrf_token %}
 {% if result %}
 <!-- Table Heading -->
  <table class = "table updated-details">
     <tr>
-      <th>Select</th>
      <th>Task name</th>
      <th>Description</th>
      <th>Duedate📅</th>
      <th>Priority</th>
      <th>Final status</th>
-     <th>Update the completion status </th>
-     <th>Edit task</th>
+     <th>Edit/Delete</th>
      
   {% for item in result %}
     <tr>
 
-     <td><input type="checkbox" name="delete_task" value="{{ item.id }}"></td>
       <!-- Table Items -->
      <td>{{ item.title }}</td>
      <td>{{ item.description }}</td>
      <td>{{ item.duedate|date:"Y - M - d" }}</td>
      <td>{{ item.priority }}</td>
-     <td>{{ item.status }}</td> 
+     <td>{{ item.Task_status }}</td> 
     </form>
-    <td>
-      <!-- Completion status -->
-    <form method="post" action="{% url 'tasks:marktaskascompleted' item.id %}">
-    {% csrf_token %}
-      <button type="submit" name="status" value="{% if item.status == 'Completed' %}false{% else %}true{% endif %}" class="icon-btn">
-        {% if item.status == "Completed" %}
-            ✅ <span class="statusC">Completed</span>
-        {% else %}
-            ⏳ <span class="statusP">Pending</span>
-        {% endif %}
-      </button>
-    </form>
-  </td>
-  <td class="center-cell"> <!-- 🆕 New column -->
-        {% if item.id %}
-          <a href="{% url 'tasks:edit_task' item.id %}" class="edit-button">✏️</a>
-        {% endif %}
-      </td>
+    <td class="center-cell"> <!-- 🆕 New column -->
+          {% if item.id %}
+            <a href="{% url 'tasks:edit_task' item.id %}" class="edit-button">✏️ </a>
+            <a href="{% url 'tasks:deletetask' item.id %}" class="delete-button" onclick="return confirm('Delete {{item.title}} task?');"> 🗑 </a>
+          {% endif %}
+        </td>
 </td>
    </tr>
   {% endfor %}
   </table>
   <br>
-  <!-- Delete button -->
-  <button class = "button button3" type="submit">Delete Task</button>
   </form>
 {% else %}
    <h4>No tasks added - Add new tasks to display </h4> 
 {% endif %}
-</body>
-</html>
 {% endblock %}

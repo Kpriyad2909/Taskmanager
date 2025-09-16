@@ -79,21 +79,6 @@ label {
   width: 100%;
 }
 
-.register {
-  color: #4b3b94;
-  font-weight: bold;
-  text-decoration: none;
-  background: none;
-  border: none;
-  padding: 0;
-  border-radius: 0;
-}
-
-.register:hover {
-  text-decoration: underline;
-  color: #302172;
-}
-
 .login {
   color: #4b3b94;
   font-weight: bold;
@@ -182,7 +167,7 @@ button {
   background-color: #4caf50;
 }
 
-.button3 {
+.button3 {      /*b3 - delete task*/
   font-size: 17px;
   text-align: center;
   margin-left: 43%;
@@ -201,7 +186,7 @@ button {
   padding: 7px 16px;
   border-radius: 10px;
 }
-.button4,.button5 {
+.button4,.button5 {               /* b4-add new tasks */
   background-color: #a2d2df;
   color: #212121;
   font-weight: bold;
@@ -214,21 +199,21 @@ button {
   background-color: #006f98;
 }
 
-.button5 {
+.button5 {         /* b5-Go to mainpage */
   display: block;
   margin: 20px auto;
   position: absolute;
-  top: 78%;
+  top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.button4:hover,.button5:hover,.button3:hover,.button6:hover,.button9:hover {
+.button4:hover,.button5:hover,.button3:hover,.button6:hover,.button9:hover,.buttonL:hover {
   background-color: #4a628a;
   color: white;
 }
 
-.button6 {
+.button6 {            /* b6-reset */
   font-style: normal;
   color: #212121;
   font-weight: bold;
@@ -239,7 +224,7 @@ button {
   height: 15px;
 }
 
-.button7 {
+.button7 {                  /* b7- login submit */
   font-size: 16.5px;
   text-align: center;
   font-style: normal;
@@ -257,7 +242,7 @@ button {
   background-color: #006f98;
 }
 
-.button8 {
+.button8 {                   /* b8- signup submit */
   font-size: 16.5px;
   text-align: center;
   font-style: normal;
@@ -275,7 +260,35 @@ button {
   background-color: #006f98;
 }
 
-.button9 {
+.pwd{
+ font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.6;
+  background: none;
+  border: none;
+  cursor: pointer;
+  float: right;
+  font-weight: bold;
+}
+
+.pwd:hover{
+  color: #3d3bf3;
+}
+
+.register {
+  display: inline;
+  margin-left: -9px;  
+  font-weight: bold;
+  color: #3d3bf3;
+  text-decoration: none;
+}
+
+.register:hover {
+  text-decoration: underline;
+  color: #302172;
+}
+
+.button9 {                     /* b9- filter */
   font-style: normal;
   color: #212121;
   font-weight: bold;
@@ -286,10 +299,26 @@ button {
   padding: 0px 10px;
   font: bolder;
   font-size: 16px;
-  padding: 7px 16px;
   border-radius: 10px;
 }
 
+.buttonL{                   /* bL- logout */
+   font-style: normal;
+  color: #212121;
+  font-weight: bold;
+  border: 1.3px solid black;
+  width: 50px;
+  height: 23px;
+  background-color: #a2d2df;
+  font: bolder;
+  font-size: 16px;
+  border-radius: 7px;
+}
+
+.nav{
+  display: flex;
+  gap: 15px;
+}
 /* a tag*/
 a:link,a:visited {
   padding: 6px 14px;
@@ -303,6 +332,13 @@ a:link,a:visited {
 a:hover {
   color: darkslateblue;
 }
+
+.p1{
+  margin-top: 18px;  
+  font-size: 16px;
+  color: #212121;
+}
+
 
 /* filter and search*/
 .filter {
@@ -424,7 +460,7 @@ li {
 .updated-details th,.updated-details td,.updated-details tr {
   padding: 3px;
   text-align: center;
-  line-height: 2.9;
+  line-height: 2.3;
   border: 1.2px solid black;
 }
 
@@ -503,13 +539,27 @@ th {
   background-color: #f7374f;
 }
 
-.edit-button:hover {
-  background-color: #7ab2d3;
-}
 
 .center-cell {
   text-align: center;
   vertical-align: middle;
+  padding: 0; /* Optional: remove padding inside <td> */
+}
+
+.edit-button,
+.delete-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;                  /* Smaller padding keeps icon centered */
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  background-color: #7ab2d3;     /* Blue hover */
 }
 
 .new {
