@@ -29,14 +29,22 @@ def add_tasks(request):
     if request.method == 'POST':
         form = TasksInputForm(request.POST)
         print("Priority choices:", form.fields['priority'].choices)
+<<<<<<< HEAD
         print("Task_status choices:", form.fields['Task_status'].choices)
+=======
+        print("Completed choices:", form.fields['completed'].choices)
+>>>>>>> 243e48f1faac87284f54b9eda3acb04c14e4f464
         if form.is_valid():
             form.save()
             return redirect('tasks:listtasks')
     else:
         form = TasksInputForm()
         print("Priority choices:", form.fields['priority'].choices)
+<<<<<<< HEAD
         print("Task_status choices:", form.fields['Task_status'].choices)
+=======
+        print("Completed choices:", form.fields['completed'].choices)
+>>>>>>> 243e48f1faac87284f54b9eda3acb04c14e4f464
     return render(request, "tasks/add_tasks.html", {'form': form})
 
 

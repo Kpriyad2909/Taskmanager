@@ -37,10 +37,17 @@
       <tr>
         <td><b>Status</b></td>
           <td>
+<<<<<<< HEAD
         {{ form.Task_status }}
         {% if form.Task_status.errors %}
           <div style="color:red;">
             {% for error in form.Task_status.errors %}
+=======
+        {{ form.completed }}
+        {% if form.completed.errors %}
+          <div style="color:red;">
+            {% for error in form.completed.errors %}
+>>>>>>> 243e48f1faac87284f54b9eda3acb04c14e4f464
               {{ error }}
             {% endfor %}
           </div>
