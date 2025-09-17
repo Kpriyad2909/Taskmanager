@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %} 
+{% load static %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Login</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert1 {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="container">
+            <p class="p1">Forgot your password? <a href="{% url 'password_reset' %}" class="register">Reset Password</a></p>
+            <p class="p1">Don't have an account? <a href="{% url 'users:signup' %}" class="register">Register</a></p>
+        </div>
+        <button type="submit" class="button button7">Submit</button>
+    </form>
+</div>
+{% endblock %}

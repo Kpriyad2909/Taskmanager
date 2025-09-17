@@ -1,8 +1,11 @@
-{% extends 'tasks/base.html' %} {% load static %} {% block content %}
+{% extends 'tasks/base.html' %} 
+{% load static %} 
+{% block content %}
 <h2>Add New Tasks<span class="add-emoji">➕</span></h2>
 <br />
 <div class="form1">
   <form method="post">
+    {% csrf_token %}
     <table class="details">
       <!-- Table Items -->
       <tr>
@@ -25,11 +28,9 @@
           <td>
         {{ form.priority }}
         {% if form.priority.errors %}
-          <div style="color:red;">
             {% for error in form.priority.errors %}
               {{ error }}
             {% endfor %}
-          </div>
         {% endif %}
       </td>
       </tr>
@@ -37,14 +38,14 @@
       <tr>
         <td><b>Status</b></td>
           <td>
-        {{ form.Task_status }}
-        {% if form.Task_status.errors %}
-          <div style="color:red;">
-            {% for error in form.Task_status.errors %}
-              {{ error }}
-            {% endfor %}
-          </div>
-        {% endif %}
+          {{ form.status }}
+          {% if form.status.errors %}
+             {% for error in form.status.errors %}
+               {{ error }}
+             {% endfor %}
+          {% endif %}
+        </td>
+      </tr>
       </td>
       </tr>
       <tr>

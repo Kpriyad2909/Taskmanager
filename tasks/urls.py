@@ -4,14 +4,11 @@ from . import views
 app_name = 'tasks'
 
 urlpatterns = [
-    path('login/',views.login_page, name = "login"),
-    path('signup/',views.signup_page, name = "signup"),
-    path('logout/', views.logout_page, name='logout'),
     path("", views.list_tasks, name = "listtasks"),
     path("add/",views.add_tasks,name = "addtasks"),
     #path('marktaskasstatus/', views.mark_task_as_status, name='marktaskasstatus'),
     path("delete/<int:task_id>/", views.delete_task, name="deletetask"),
-    path('edit/<int:task_id>/', views.task_form, name='edit_task'), 
+    path('edit/<int:task_id>/', views.edit_form, name='edit_task'), 
 ]
 
 # http://127.0.0.1:8000/

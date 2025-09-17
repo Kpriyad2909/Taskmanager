@@ -1,0 +1,167 @@
+/* General body and container styles */
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px; /* Increased max-width for content */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header and navigation bar styles */
+header {
+    background-color: #4a148c; /* Purple */
+    padding: 15px 0;
+    color: white;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Match container width */
+    margin: 0 auto;
+    padding: 0 20px; /* Add some padding to the sides */
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex; /* Use flexbox for button alignment */
+    gap: 10px; /* Space between buttons */
+}
+
+/* Header Navigation Buttons (Login/Signup/Logout) */
+.header-nav-button {
+    display: inline-block;
+    padding: 8px 15px; /* Smaller padding for header buttons */
+    border-radius: 5px;
+    background-color: white; /* White background for header buttons */
+    color: #4a148c; /* Purple text */
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 1px solid white; /* White border */
+    cursor: pointer;
+}
+
+.header-nav-button:hover {
+    background-color: #f3e5f5; /* Light purple on hover */
+    color: #333;
+    border-color: #f3e5f5;
+}
+
+.header-signup-button {
+    background-color: transparent; /* Transparent background for signup button */
+    border: 1px solid white; /* White border */
+    color: white; /* White text */
+}
+
+.header-signup-button:hover {
+    background-color: white;
+    color: #4a148c; /* Purple text on hover */
+}
+
+
+/* --- Front page content layout --- */
+.front-page-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 0; /* Vertical padding for content */
+    gap: 40px; /* Space between columns */
+}
+
+.left-column {
+    flex: 1; /* Takes up available space */
+    text-align: left;
+    max-width: 50%; /* Adjust as needed */
+}
+
+.app-title-main {
+    font-size: 3.5em; /* Larger title */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.tagline-main {
+    font-size: 1.4em; /* Larger tagline */
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+.get-started-button {
+    display: inline-block;
+    padding: 15px 35px;
+    border-radius: 8px;
+    background-color: #e74c3c; /* Red like the TODO app button */
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.get-started-button:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+.right-column {
+    flex: 1; /* Takes up available space */
+    text-align: right; /* Aligns image to the right */
+    max-width: 50%; /* Adjust as needed */
+}
+
+.hero-image {
+    max-width: 100%; /* Ensures image is responsive */
+    height: auto;
+}
+
+/* Footer styles (keep as is) */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    margin-top: 50px;
+    color: #555;
+    font-size: 0.9em;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .front-page-content {
+        flex-direction: column; /* Stack columns vertically on small screens */
+        text-align: center;
+    }
+
+    .left-column, .right-column {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .app-title-main {
+        font-size: 2.5em;
+    }
+
+    .tagline-main {
+        font-size: 1.1em;
+    }
+
+    .nav-links {
+        flex-direction: column; /* Stack header buttons vertically */
+        gap: 5px;
+    }
+}

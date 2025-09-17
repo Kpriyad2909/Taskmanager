@@ -1,84 +1,82 @@
 {% extends 'tasks/base.html' %}
 {% load static %}
 {% block content %}
-    <header>
-      <div><h2 class = 'h21'>Task lists<span class = "list-emoji">📋</span></h2></div>
-       <div class="nav">
-        <a href="{% url 'tasks:addtasks' %}" class="button4">Add new tasks</a>
-        <a href="{% url 'tasks:login' %}" class = "buttonL">Logout</a>
-      </div> 
-    </header>
 
-<!-- Filter Form -->
-<div class="filter">
-<!-- Search Form -->
-<form method="get">
-  <div class="search">
-    <input type="text" name="search" placeholder="Search..." class="search-input" value="{{ searchtasks }}">
-    <button type="submit" class="search-button">🔍</button>
+{% if messages %}
+  <div class="messages-container">
+    {% for message in messages %}
+      <div class="alert {{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
   </div>
-  </form>
+{% endif %}
+
+<header>
+  <div>
+    <h2 class="h21">Task lists<span class="list-emoji">📋</span></h2>
+  </div>
+  <div class="nav">
+    <a href="{% url 'tasks:addtasks' %}" class="button4">Add new tasks</a>
+    <a href="{% url 'users:logout' %}" class="buttonL">Logout</a>
+  </div>
+</header>
 <div class="filter-controls">
- <form method="get" action="{% url 'tasks:listtasks' %}">
-  <label>Status:</label>
-  <select name="status">
-    <option value="">All</option>
-    <option value="Pending" {% if filterstatus == 'Pending' %}selected{% endif %}>Pending</option>
-    <option value="Pending" {% if filterstatus == 'In Progress' %}selected{% endif %}>In Progress</option>
-    <option value="status" {% if filterstatus == 'status' %}selected{% endif %}>status</option>
-  </select>
+  <form method="get" action="{% url 'tasks:listtasks' %}">
+    <div class="filter-row">
+      <div class="search-container">
+        <label for="id_search" class="sr-only"></label>
+        {{ filter_form.search }}
+        <button type="submit" class="search-button">🔍</button>
+      </div>
 
-  <label>Priority:</label>
-  <select name="priority">
-    <option value="">All</option>
-    <option value="high" {% if filterpriority == 'high' %}selected{% endif %}>High</option>
-    <option value="medium" {% if filterpriority == 'medium' %}selected{% endif %}>Medium</option>
-    <option value="low" {% if filterpriority == 'low' %}selected{% endif %}>Low</option>
-  </select>
+      <div class="filter-group">
+        <label for="id_status">Status</label>
+        {{ filter_form.status }}
+      </div>
 
-  <button class = "button9" type="submit">Filter</button> 
+      <div class="filter-group">
+        <label for="id_priority">Priority</label>
+        {{ filter_form.priority }}
+      </div>
 
-  <!-- Reset Button -->
-   <a href="{{ request.path }}" class = "button6">Reset</a>
-   </form>
-</div>
- </div>
- 
-    {% csrf_token %}
-{% if result %}
-<!-- Table Heading -->
- <table class = "table updated-details">
-    <tr>
-     <th>Task name</th>
-     <th>Description</th>
-     <th>Duedate📅</th>
-     <th>Priority</th>
-     <th>Final status</th>
-     <th>Edit/Delete</th>
-     
-  {% for item in result %}
-    <tr>
-
-      <!-- Table Items -->
-     <td>{{ item.title }}</td>
-     <td>{{ item.description }}</td>
-     <td>{{ item.duedate|date:"Y - M - d" }}</td>
-     <td>{{ item.priority }}</td>
-     <td>{{ item.Task_status }}</td> 
-    </form>
-    <td class="center-cell"> <!-- 🆕 New column -->
-          {% if item.id %}
-            <a href="{% url 'tasks:edit_task' item.id %}" class="edit-button">✏️ </a>
-            <a href="{% url 'tasks:deletetask' item.id %}" class="delete-button" onclick="return confirm('Delete {{item.title}} task?');"> 🗑 </a>
-          {% endif %}
-        </td>
-</td>
-   </tr>
-  {% endfor %}
-  </table>
-  <br>
+      <div class="button-group">
+        <button class="button-common" type="submit">Filter</button>
+        <a href="{% url 'tasks:listtasks' %}" class="button-common">Reset</a>
+      </div>
+    </div>
   </form>
+</div>
+
+{% if result %}
+<table class="table updated-details">
+  <tr>
+    <th>Task name</th>
+    <th>Description</th>
+    <th>Duedate📅</th>
+    <th>Priority</th>
+    <th>Final status</th>
+    <th>Edit/Delete</th>
+  </tr>
+  
+  {% for item in result %}
+  <tr>
+    <td>{{ item.title }}</td>
+    <td>{{ item.description }}</td>
+    <td>{{ item.duedate|date:"Y - M - d" }}</td>
+    <td>{{ item.priority }}</td>
+    <td>{{ item.status }}</td>
+    <td class="center-cell">
+      {% if item.id %}
+        <a href="{% url 'tasks:edit_task' item.id %}" class="edit-button">✏️</a>
+        <a href="{% url 'tasks:deletetask' item.id %}" class="delete-button" onclick="return confirm('Delete {{item.title}} task?');">🗑</a>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+<br>
 {% else %}
-   <h4>No tasks added - Add new tasks to display </h4> 
+  <h4>No tasks added - Add new tasks to display </h4>
 {% endif %}
 {% endblock %}

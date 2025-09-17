@@ -1,0 +1,210 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: black;
+}
+
+.h11 {
+  display: flex;
+  background-color: #7ab2d3;
+  justify-content: center;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin: 10px;
+}
+
+/* General container for the signup form */
+.signup-container {
+  max-width: 450px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  font-family: Arial, sans-serif;
+}
+
+.form-title {
+  text-align: center;
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+/* Styling for each individual form field (label + input) */
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #444;
+}
+
+/* Styling for all input fields (text, password) */
+.signup-form input[type="text"],
+.signup-form input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+/* Styling for the login prompt link */
+.login-prompt {
+  text-align: left;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 0.95em;
+  color: #555;
+}
+
+.login-prompt a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-prompt a:hover {
+  text-decoration: underline;
+}
+
+/* Styling for the submit button */
+.Sbutton {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  background-color: #4a148c;
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Sbutton:hover {
+  background-color: #6a1b9a;
+}
+
+/* Container for the entire form to center it and add a box shadow */
+.form-container {
+    max-width: 450px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Form title (Login/Sign up) */
+.form-container h2 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Styles for the Django form fields */
+.form-container p {
+    margin-bottom: 15px;
+    text-align: left; /* Align labels and inputs to the left */
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Include padding in the width */
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="password"]:focus,
+.form-container input[type="email"]:focus {
+    border-color: #8c78d1;
+    outline: none;
+}
+
+/* Button styles (Login/Submit) */
+.form-container .button7 {
+    width: 100%;
+    padding: 15px;
+    background-color: #6a1b9a; /* Your preferred purple */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-container .button7:hover {
+    background-color: #4a148c;
+}
+
+/* Links below the form */
+.form-container .container {
+    margin-top: 20px;
+    display: block; /* Ensure container takes full width */
+    text-align: center;
+}
+
+.form-container .p1 {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 8px;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.form-container .register {
+    color: #4a148c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.form-container .register:hover {
+    text-decoration: underline;
+}
+
+/* Alert/Message styles */
+.form-container .alert1 {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.form-container .alert1.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}

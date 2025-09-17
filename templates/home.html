@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="front-page-content">
+  <div class="left-column">
+    <h1 class="app-title-main">Task Manager</h1>
+    <p class="tagline-main">
+      Organize your life, stay focused, achieve your goals.
+    </p>
+    {% if user.is_authenticated %}
+    <a href="{% url 'tasks:listtasks' %}" class="get-started-button"
+      >Go to My Tasks</a
+    >
+    {% else %}
+    <a href="{% url 'users:login' %}" class="get-started-button">Get Started</a>
+    {% endif %}
+  </div>
+  <div class="right-column">
+    <img
+      src="{% static 'users/taskmanagerImage.png' %}"
+      alt="Task Management"
+      class="hero-image"
+    />
+  </div>
+</div>
+{% endblock %}
